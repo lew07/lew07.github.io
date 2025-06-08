@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Six Sigma E-commerce Strategy: RVSO78 & Original Landlords</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony -->
+    <!-- Application Structure Plan: The application is structured as an interactive dashboard with three main thematic sections: 1. 'Current State Analysis' to provide an overview of the businesses and their core challenges, 2. 'Strategic Improvement Roadmap' which serves as the main interactive area, allowing users to explore the three key Six Sigma projects (Fulfillment, Marketing, Reviews) in detail, and 3. 'Six Sigma Frameworks Explained' to provide educational context on the DMAIC/DMADV methodologies. This structure was chosen over a linear report format to empower the user (e.g., the student, Mr. Arviso) to freely explore the areas most relevant to them. The dashboard approach facilitates a quick understanding of the key issues and proposed solutions, while interactive elements like clickable process maps and charts encourage engagement and deeper comprehension of the data-driven strategy. -->
+    <!-- Visualization & Content Choices: 
+        - Current Challenges (Section 1): Goal: Inform. Method: Styled HTML cards with icons. Interaction: None. Justification: Quickly communicate the primary pain points identified in the report.
+        - Fulfillment Process (Section 2): Goal: Organize & Analyze. Method: Interactive HTML/CSS process flow (SIPOC model). Interaction: Click to reveal details for each step. Justification: Visually breaks down the complex manual fulfillment process, making bottlenecks intuitive.
+        - Fulfillment Metrics (Section 2): Goal: Compare. Method: Chart.js Bar Chart. Interaction: Hover for tooltips. Justification: Clearly visualizes the quantitative goals of the Six Sigma project (e.g., reducing cycle time) from the Project Charter.
+        - Marketing Funnel (Section 2): Goal: Inform & Analyze. Method: Chart.js Doughnut Chart and interactive HTML cards. Interaction: Click on 'Root Causes' to reveal details. Justification: Visually represents the abstract concept of low conversion rates and allows exploration of underlying causes like SEO issues or lack of trust signals.
+        - Customer Review System (Section 2): Goal: Organize. Method: Interactive HTML/CSS diagram for the DMADV cycle. Interaction: Click on each phase. Justification: Explains the process of creating a *new* system, which differs from improving an existing one.
+        - DMAIC/DMADV Frameworks (Section 3): Goal: Inform. Method: Clickable HTML/CSS diagrams. Interaction: Click phase to see description. Justification: Provides foundational knowledge on the Six Sigma methodologies referenced throughout the report.
+        - All choices confirm to NO SVG/Mermaid. Chart.js is used for data visualization and custom HTML/CSS/JS is used for all process diagrams. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #FDFBF8; }
+        .bg-warm-neutral { background-color: #FDFBF8; }
+        .bg-secondary { background-color: #F5F1EC; }
+        .accent-color { color: #8D6E63; }
+        .accent-bg { background-color: #8D6E63; }
+        .text-dark { color: #3E2723; }
+        .text-medium { color: #5D4037; }
+        .text-light { color: #A1887F; }
+        .card { background-color: #FFFFFF; border: 1px solid #EFEBE9; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); transition: all 0.3s ease; }
+        .card:hover { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05); transform: translateY(-3px); }
+        .nav-button { transition: all 0.2s ease; border-bottom: 2px solid transparent; }
+        .nav-button.active { border-bottom-color: #8D6E63; color: #3E2723; font-weight: 600; }
+        .nav-button:hover { color: #3E2723; }
+        .chart-container { position: relative; width: 100%; max-width: 500px; margin-left: auto; margin-right: auto; height: 300px; max-height: 350px; }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+        .process-step { cursor: pointer; border-left: 3px solid #D7CCC8; transition: all 0.3s ease; }
+        .process-step:hover { border-left-color: #8D6E63; background-color: #F5F1EC; }
+        .process-step.active { border-left-color: #5D4037; }
+        .process-step-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; }
+        .process-step.active .process-step-content { max-height: 500px; }
+        .dmaic-step { cursor: pointer; transition: background-color 0.3s ease; }
+    </style>
+</head>
+<body class="bg-warm-neutral text-dark">
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-dark mb-2">Six Sigma E-commerce Strategy</h1>
+            <p class="text-lg text-medium">An Interactive Improvement Plan for Jeremy Arviso's Ventures</p>
+        </header>
+
+        <nav class="flex justify-center border-b border-gray-200 mb-12">
+            <div class="flex space-x-8">
+                <button class="nav-button active py-4 px-1 text-base font-medium text-medium" onclick="showSection('overview')">Current State Analysis</button>
+                <button class="nav-button py-4 px-1 text-base font-medium text-medium" onclick="showSection('roadmap')">Improvement Roadmap</button>
+                <button class="nav-button py-4 px-1 text-base font-medium text-medium" onclick="showSection('frameworks')">Frameworks Explained</button>
+            </div>
+        </nav>
+
+        <main>
+            <section id="overview" class="content-section">
+                <div class="text-center mb-12">
+                     <h2 class="text-3xl font-semibold mb-2">Business Overview & Core Challenges</h2>
+                     <p class="max-w-3xl mx-auto text-medium">This section provides a snapshot of Jeremy Arviso's multifaceted e-commerce operations, encompassing brands like Original Landlords, RVS078, and Hood Mats. It highlights the primary operational challenges identified through analysis, which form the basis for the proposed Six Sigma improvement projects. These challenges represent significant opportunities for enhancing efficiency, customer satisfaction, and profitability.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="card p-6 text-center">
+                        <div class="mb-4"><span class="text-5xl">⚙️</span></div>
+                        <h3 class="font-semibold text-xl mb-2">Fulfillment Complexity</h3>
+                        <p class="text-sm text-medium">Significant time spent on manual fulfillment for wholesale & trademark-sensitive orders, creating a major operational bottleneck.</p>
+                    </div>
+                    <div class="card p-6 text-center">
+                        <div class="mb-4"><span class="text-5xl">📉</span></div>
+                        <h3 class="font-semibold text-xl mb-2">Low Online Conversion</h3>
+                        <p class="text-sm text-medium">Low Google conversion rates and perceived high cost of online marketing are hindering online sales growth and potential.</p>
+                    </div>
+                    <div class="card p-6 text-center">
+                        <div class="mb-4"><span class="text-5xl">🗣️</span></div>
+                        <h3 class="font-semibold text-xl mb-2">No Customer Feedback</h3>
+                        <p class="text-sm text-medium">Lack of a customer review system on websites creates a blind spot for online customer satisfaction and misses a key trust signal.</p>
+                    </div>
+                    <div class="card p-6 text-center">
+                        <div class="mb-4"><span class="text-5xl"> 🤹‍♂️ </span></div>
+                        <h3 class="font-semibold text-xl mb-2">Resource Constraints</h3>
+                        <p class="text-sm text-medium">As a solo operator, lack of manpower and capital strains ability to focus on strategic growth areas across multiple ventures.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="roadmap" class="content-section hidden">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-semibold mb-2">Strategic Improvement Roadmap</h2>
+                    <p class="max-w-3xl mx-auto text-medium">Here we explore three targeted Six Sigma projects designed to address the core challenges. Each project follows a structured methodology to deliver measurable improvements. Interact with the elements below to see how we can streamline fulfillment, boost online sales, and build a robust customer feedback loop.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-1 gap-12">
+                    <div class="card p-8">
+                        <h3 class="text-2xl font-bold text-dark mb-4 text-center">Project 1: Streamline Manual Order Fulfillment</h3>
+                        <p class="text-center text-medium mb-8">This project targets the most time-consuming manual processes to reclaim valuable hours, reduce costs, and improve consistency for wholesale and trademark-sensitive orders.</p>
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <h4 class="font-semibold mb-4 text-lg text-center">Current Fulfillment Process (SIPOC)</h4>
+                                <div id="process-flow-container" class="space-y-2">
+                                    <div class="process-step p-4 rounded-lg" onclick="toggleProcessStep(this)">
+                                        <div class="flex justify-between items-center">
+                                            <h5 class="font-semibold">1. Order Received & Flagged</h5>
+                                            <span class="text-xl accent-color transition-transform transform">+</span>
+                                        </div>
+                                        <div class="process-step-content mt-2 text-sm text-medium">
+                                            <p><strong>Suppliers:</strong> Customer, Shopify/WooCommerce</p>
+                                            <p><strong>Inputs:</strong> Order data, customer details.</p>
+                                            <p><strong>Pain Point:</strong> No automated system to flag orders for manual vs. Printful fulfillment, relies on manual review.</p>
+                                        </div>
+                                    </div>
+                                    <div class="process-step p-4 rounded-lg" onclick="toggleProcessStep(this)">
+                                        <h5 class="font-semibold">2. Design Prep & Print Decision</h5>
+                                        <span class="text-xl accent-color transition-transform transform">+</span>
+                                        <div class="process-step-content mt-2 text-sm text-medium">
+                                             <p><strong>Process:</strong> Verify design files, decide between in-house or outsourced printing based on complexity.</p>
+                                             <p><strong>Pain Point:</strong> Decision criteria for outsourcing are not standardized, leading to variability in cost and time.</p>
+                                        </div>
+                                    </div>
+                                    <div class="process-step p-4 rounded-lg" onclick="toggleProcessStep(this)">
+                                        <h5 class="font-semibold">3. Item Printed & Quality Check</h5>
+                                         <span class="text-xl accent-color transition-transform transform">+</span>
+                                        <div class="process-step-content mt-2 text-sm text-medium">
+                                            <p><strong>Process:</strong> Item is printed either in-house or by an external vendor, then checked for quality.</p>
+                                            <p><strong>Pain Point:</strong> Delays from external printers are common; quality can be inconsistent without standardized checks.</p>
+                                        </div>
+                                    </div>
+                                    <div class="process-step p-4 rounded-lg" onclick="toggleProcessStep(this)">
+                                        <h5 class="font-semibold">4. Pack & Ship</h5>
+                                         <span class="text-xl accent-color transition-transform transform">+</span>
+                                        <div class="process-step-content mt-2 text-sm text-medium">
+                                            <p><strong>Outputs:</strong> Shipped package, tracking info.</p>
+                                            <p><strong>Customers:</strong> Wholesale clients, retail buyers.</p>
+                                            <p><strong>Pain Point:</strong> Packing is manual and time-consuming; no standard packing procedure.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-4 text-lg text-center">Fulfillment Improvement Goals</h4>
+                                <div class="chart-container">
+                                    <canvas id="fulfillmentChart"></canvas>
+                                </div>
+                                <p class="text-xs text-center mt-2 text-light">Visualization of SMART goals from the project charter.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-8">
+                        <h3 class="text-2xl font-bold text-dark mb-4 text-center">Project 2: Improve Online Sales Conversion</h3>
+                        <p class="text-center text-medium mb-8">This project focuses on turning website visitors into customers by diagnosing and fixing issues in the online sales funnel, from discovery on Google to final checkout.</p>
+                        <div class="grid md:grid-cols-2 gap-8 items-center">
+                            <div>
+                                <h4 class="font-semibold mb-4 text-lg text-center">The Conversion Challenge</h4>
+                                <div class="chart-container">
+                                    <canvas id="conversionChart"></canvas>
+                                </div>
+                                <p class="text-xs text-center mt-2 text-light">Illustrates how visitors are lost at each stage.</p>
+                            </div>
+                             <div>
+                                <h4 class="font-semibold mb-4 text-lg text-center">Root Causes & Solutions</h4>
+                                <div class="space-y-4">
+                                    <div class="process-step p-4 rounded-lg" onclick="toggleProcessStep(this)">
+                                        <h5 class="font-semibold">SEO Deficiencies</h5>
+                                        <div class="process-step-content mt-2 text-sm text-medium">
+                                            <p><strong>Problem:</strong> Poor keyword targeting and technical SEO issues mean the right customers aren't finding the sites.</p>
+                                            <p><strong>Solution:</strong> Implement on-page and technical SEO best practices, including keyword research and site speed optimization.</p>
+                                        </div>
+                                    </div>
+                                    <div class="process-step p-4 rounded-lg" onclick="toggleProcessStep(this)">
+                                        <h5 class="font-semibold">Lack of Trust Signals</h5>
+                                        <div class="process-step-content mt-2 text-sm text-medium">
+                                            <p><strong>Problem:</strong> Absence of customer reviews and security badges makes new visitors hesitate to purchase.</p>
+                                            <p><strong>Solution:</strong> Implement a customer review system and display trust badges throughout the checkout process.</p>
+                                        </div>
+                                    </div>
+                                    <div class="process-step p-4 rounded-lg" onclick="toggleProcessStep(this)">
+                                        <h5 class="font-semibold">Poor User Experience (UX)</h5>
+                                        <div class="process-step-content mt-2 text-sm text-medium">
+                                            <p><strong>Problem:</strong> Complicated navigation or checkout process leads to high cart abandonment.</p>
+                                            <p><strong>Solution:</strong> Streamline the checkout flow, offer guest checkout, and improve product page clarity with better descriptions and images.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-8">
+                        <h3 class="text-2xl font-bold text-dark mb-4 text-center">Project 3: Implement a Customer Review System</h3>
+                        <p class="text-center text-medium mb-8">This project uses the DMADV framework to design and launch a new system for collecting and displaying customer reviews, a critical component for building trust and gathering feedback.</p>
+                        <div class="flex flex-wrap justify-center gap-2">
+                             <div class="dmaic-step text-center p-3 border border-gray-200 rounded-lg flex-1 min-w-[150px] bg-secondary" onclick="showDmaicInfo('d1')">
+                                <h4 class="font-bold text-dark">Define</h4>
+                                <p class="text-xs text-medium">Goals for the system</p>
+                            </div>
+                            <div class="dmaic-step text-center p-3 border border-gray-200 rounded-lg flex-1 min-w-[150px]" onclick="showDmaicInfo('d2')">
+                                <h4 class="font-bold text-dark">Measure</h4>
+                                <p class="text-xs text-medium">Customer needs</p>
+                            </div>
+                            <div class="dmaic-step text-center p-3 border border-gray-200 rounded-lg flex-1 min-w-[150px]" onclick="showDmaicInfo('d3')">
+                                <h4 class="font-bold text-dark">Analyze</h4>
+                                <p class="text-xs text-medium">Platform options</p>
+                            </div>
+                            <div class="dmaic-step text-center p-3 border border-gray-200 rounded-lg flex-1 min-w-[150px]" onclick="showDmaicInfo('d4')">
+                                <h4 class="font-bold text-dark">Design</h4>
+                                <p class="text-xs text-medium">Build & configure</p>
+                            </div>
+                            <div class="dmaic-step text-center p-3 border border-gray-200 rounded-lg flex-1 min-w-[150px]" onclick="showDmaicInfo('d5')">
+                                <h4 class="font-bold text-dark">Verify</h4>
+                                <p class="text-xs text-medium">Test & monitor</p>
+                            </div>
+                        </div>
+                        <div id="dmaic-info-box" class="mt-6 p-6 bg-secondary rounded-lg text-medium">
+                            <h4 id="dmaic-info-title" class="font-bold text-lg mb-2 text-dark">Define</h4>
+                            <p id="dmaic-info-text">Set clear goals for the new review system: Increase customer trust, gather actionable product feedback, and improve online conversion rates. This establishes the "why" behind the project.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="frameworks" class="content-section hidden">
+                 <div class="text-center mb-12">
+                    <h2 class="text-3xl font-semibold mb-2">Six Sigma Frameworks Explained</h2>
+                    <p class="max-w-3xl mx-auto text-medium">Six Sigma is a disciplined, data-driven approach for eliminating defects. The projects in this roadmap use two core methodologies: DMAIC for improving existing processes and DMADV for designing new ones. Click on each phase below to learn more about its role in driving structured, sustainable improvements.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="card p-8">
+                        <h3 class="text-xl font-bold mb-4 text-center">DMAIC: Improving Existing Processes</h3>
+                         <div class="flex flex-col space-y-2">
+                             <div class="dmaic-step text-center p-3 border border-gray-200 rounded-lg" onclick="showFrameworkInfo('dmaic', 'Define', 'Clearly articulate the problem, goals, and scope of the project. This sets the foundation and direction.')">Define</div>
+                             <div class="text-center text-light">↓</div>
+                             <div class="dmaic-step text-center p-3 border border-gray-200 rounded-lg" onclick="showFrameworkInfo('dmaic', 'Measure', 'Collect data to quantify the current process performance and establish a baseline. This is where we understand the magnitude of the problem.')">Measure</div>
+                             <div class="text-center text-light">↓</div>
+                             <div class="dmaic-step text-center p-3 border border-gray-200 rounded-lg" onclick="showFrameworkInfo('dmaic', 'Analyze', 'Analyze the data to identify the root causes of defects and inefficiencies. This step moves from symptoms to causes.')">Analyze</div>
+                              <div class="text-center text-light">↓</div>
+                             <div class="dmaic-step text-center p-3 border border-gray-200 rounded-lg" onclick="showFrameworkInfo('dmaic', 'Improve', 'Develop, pilot, and implement solutions that address the root causes. This is the action-oriented phase.')">Improve</div>
+                              <div class="text-center text-light">↓</div>
+                             <div class="dmaic-step text-center p-3 border border-gray-200 rounded-lg" onclick="showFrameworkInfo('dmaic', 'Control', 'Establish systems to sustain the gains and monitor the improved process over time. This ensures the improvements stick.')">Control</div>
+                         </div>
+                         <div id="dmaic-framework-info" class="mt-6 p-4 bg-secondary rounded-lg text-medium hidden">
+                            <h4 id="dmaic-framework-title" class="font-bold"></h4>
+                            <p id="dmaic-framework-text"></p>
+                         </div>
+                    </div>
+                     <div class="card p-8">
+                        <h3 class="text-xl font-bold mb-4 text-center">DMADV: Designing New Processes</h3>
+                         <div class="flex flex-col space-y-2">
+                             <div class="dmaic-step text-center p-3 border border-gray-200 rounded-lg" onclick="showFrameworkInfo('dmadv', 'Define', 'Define the project goals and customer deliverables that are critical to quality. Used for the Customer Review System project.')">Define</div>
+                             <div class="text-center text-light">↓</div>
+                             <div class="dmaic-step text-center p-3 border border-gray-200 rounded-lg" onclick="showFrameworkInfo('dmadv', 'Measure', 'Measure and determine customer needs and specifications. What does the customer expect from this new process?')">Measure</div>
+                             <div class="text-center text-light">↓</div>
+                             <div class="dmaic-step text-center p-3 border border-gray-200 rounded-lg" onclick="showFrameworkInfo('dmadv', 'Analyze', 'Analyze the process options to meet customer needs. This involves exploring different solutions and approaches.')">Analyze</div>
+                              <div class="text-center text-light">↓</div>
+                             <div class="dmaic-step text-center p-3 border border-gray-200 rounded-lg" onclick="showFrameworkInfo('dmadv', 'Design', 'Design the process in detail to meet customer needs. This is where the new process is built on paper.')">Design</div>
+                              <div class="text-center text-light">↓</div>
+                             <div class="dmaic-step text-center p-3 border border-gray-200 rounded-lg" onclick="showFrameworkInfo('dmadv', 'Verify', 'Verify the design performance and its ability to meet customer needs through pilot runs and testing.')">Verify</div>
+                         </div>
+                          <div id="dmadv-framework-info" class="mt-6 p-4 bg-secondary rounded-lg text-medium hidden">
+                            <h4 id="dmadv-framework-title" class="font-bold"></h4>
+                            <p id="dmadv-framework-text"></p>
+                         </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <script>
+        const sections = document.querySelectorAll('.content-section');
+        const navButtons = document.querySelectorAll('.nav-button');
+
+        function showSection(sectionId) {
+            sections.forEach(section => {
+                if (section.id === sectionId) {
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+            navButtons.forEach(button => {
+                if (button.textContent.toLowerCase().includes(sectionId.split('-')[0])) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
+
+        function toggleProcessStep(element) {
+            const container = document.getElementById('process-flow-container');
+            const allSteps = container.querySelectorAll('.process-step');
+            const icon = element.querySelector('span');
+
+            if (element.classList.contains('active')) {
+                element.classList.remove('active');
+                icon.classList.remove('rotate-45');
+            } else {
+                allSteps.forEach(step => {
+                    step.classList.remove('active');
+                    step.querySelector('span').classList.remove('rotate-45');
+                });
+                element.classList.add('active');
+                icon.classList.add('rotate-45');
+            }
+        }
+        
+        const dmadvInfo = {
+            d1: { title: "Define", text: "Set clear goals for the new review system: Increase customer trust, gather actionable product feedback, and improve online conversion rates. This establishes the 'why' behind the project." },
+            d2: { title: "Measure", text: "Identify critical-to-quality characteristics from the customer's perspective. What features are essential in a review system (e.g., photo uploads, ease of use, Q&A)?" },
+            d3: { title: "Analyze", text: "Analyze and compare different platform options (e.g., Yotpo, Judge.me, Loox for Shopify/WooCommerce) based on cost, features, and integration capabilities." },
+            d4: { title: "Design", text: "Design the detailed process, including selecting and configuring the chosen platform, and creating the automated email workflow for requesting reviews post-purchase." },
+            d5: { title: "Verify", text: "Test the new system to ensure it functions correctly. Monitor initial review collection rates and verify its impact on key metrics like conversion." }
+        };
+
+        function showDmaicInfo(id) {
+            document.getElementById('dmaic-info-title').innerText = dmadvInfo[id].title;
+            document.getElementById('dmaic-info-text').innerText = dmadvInfo[id].text;
+            
+            document.querySelectorAll('.dmaic-step').forEach(el => el.classList.remove('bg-secondary'));
+            event.currentTarget.classList.add('bg-secondary');
+        }
+
+        function showFrameworkInfo(type, title, text) {
+            const infoBox = document.getElementById(`${type}-framework-info`);
+            const titleEl = document.getElementById(`${type}-framework-title`);
+            const textEl = document.getElementById(`${type}-framework-text`);
+            
+            titleEl.textContent = title;
+            textEl.textContent = text;
+            infoBox.classList.remove('hidden');
+        }
+
+
+        window.onload = function() {
+            const fulfillmentCtx = document.getElementById('fulfillmentChart').getContext('2d');
+            new Chart(fulfillmentCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Avg. Cycle Time (Days)', 'Manual Time (Hrs/Wk)', 'Variable Costs (%)'],
+                    datasets: [{
+                        label: 'Current State',
+                        data: [4, 9, 100],
+                        backgroundColor: '#A1887F',
+                        borderColor: '#A1887F',
+                        borderWidth: 1
+                    }, {
+                        label: 'Goal',
+                        data: [2, 3.5, 85],
+                        backgroundColor: '#8D6E63',
+                        borderColor: '#8D6E63',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true }
+                    },
+                    plugins: {
+                        title: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        if (context.label.includes('Costs')) {
+                                           label += (100-context.parsed.y) + '% Reduction';
+                                        } else {
+                                           label += context.parsed.y;
+                                        }
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const conversionCtx = document.getElementById('conversionChart').getContext('2d');
+            new Chart(conversionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Successful Conversions', 'Cart Abandonment', 'Bounced Visitors'],
+                    datasets: [{
+                        data: [3, 27, 70],
+                        backgroundColor: ['#8D6E63', '#A1887F', '#D7CCC8'],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Typical E-commerce Visitor Funnel',
+                            color: '#3E2723',
+                            font: { size: 14 }
+                        },
+                         tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}% of non-converting visitors`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
