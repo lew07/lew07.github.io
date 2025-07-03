@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Six Sigma DMAIC Infographic: Arviso Ventures E-commerce Optimization</title>
+    <title>LSS RVSO78</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,9 +13,9 @@
     Application Structure Plan: The infographic follows the 5 phases of the Six Sigma DMAIC framework (Define, Measure, Analyze, Improve, Control) to tell a linear, compelling story. This expanded version provides more detail and visuals in each phase to serve as a complete project summary.
 
     Visualization & Content Choices:
-    - Define Phase -> KPI Cards -> Goal: Inform -> Justification: Clearly state the problem and the high-level goal. Method: Styled HTML.
-    - Measure Phase -> Detailed Funnel Table & Chart -> Goal: Inform/Compare -> Justification: A table provides precise data while a bar chart visualizes the drop-offs. Library: Chart.js/Canvas.
-    - Analyze Phase -> Fishbone & Root Cause Validation -> Goal: Organize/Relationships -> Justification: The Fishbone visualizes brainstormed causes, while text connects them to the measured data. Method: Structured HTML/CSS.
+    - Define Phase -> KPI Cards & Process Map -> Goal: Inform -> Justification: Clearly state the problem, goal, and visually define the scope. Method: Styled HTML.
+    - Measure Phase -> Detailed Funnel Table & Multiple Charts -> Goal: Inform/Compare -> Justification: Provide a rich, multi-faceted view of the baseline data. Library: Chart.js/Canvas.
+    - Analyze Phase -> Fishbone & Sankey Diagram -> Goal: Organize/Relationships -> Justification: The Fishbone visualizes brainstormed causes, while the Sankey visually validates the data-driven root causes. Method: Structured HTML/CSS.
     - Improve Phase -> Solution Cards -> Goal: Organize/Inform -> Justification: A card layout clearly presents the prioritized solutions and their action plans. Method: Styled HTML.
     - Control Phase -> Control Plan Table, KPI Cards & Line Chart -> Goal: Inform/Change -> Justification: A table details the control plan, KPI cards quantify financial impact, and a line chart shows sustained success. Library: Chart.js/Canvas.
 
@@ -27,8 +27,8 @@
             background-color: #f1f5f9;
         }
         .phase-container {
-            padding: 3rem 0;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 4rem 0;
+            border-bottom: 2px solid #e2e8f0;
         }
         .phase-container:last-child {
             border-bottom: none;
@@ -36,26 +36,27 @@
         .phase-header {
             display: flex;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
         .phase-icon {
-            width: 3rem;
-            height: 3rem;
+            width: 3.5rem;
+            height: 3.5rem;
             background-color: #3b82f6;
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 1.5rem;
+            font-weight: 800;
+            font-size: 1.75rem;
             flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
         }
         .info-card {
             background-color: white;
             border-radius: 1rem;
             padding: 2rem;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.05);
         }
         .chart-container {
             position: relative;
@@ -73,6 +74,30 @@
         }
         .control-table th {
             background-color: #f1f5f9;
+            font-weight: 600;
+        }
+        .process-box {
+            position: absolute;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            border: 1px solid;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .sankey-node {
+            background-color: #3b82f6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+        }
+        .sankey-flow {
+            background-color: #93c5fd;
+            border-radius: 0.5rem;
+        }
+        .sankey-drop {
+            background-color: #fca5a5;
+            border-radius: 0.5rem;
         }
     </style>
 </head>
@@ -93,11 +118,34 @@
                     <p class="text-slate-500">Establishing the project's foundation by clearly articulating the problem and defining measurable goals.</p>
                 </div>
             </div>
-            <div class="info-card">
-                <h3 class="text-xl font-bold">Project Charter Summary</h3>
-                <p class="mt-4 text-slate-600"><strong>Business Case:</strong> The business has an inconsistent and difficult-to-measure Return on Investment (ROI) from its digital channels, limiting growth.</p>
-                <p class="mt-2 text-slate-600"><strong>Problem Statement:</strong> A low e-commerce conversion rate (**1.66%**) and a low returning customer rate (**6.67%**) result in significant lost revenue and prevent the development of a loyal customer base.</p>
-                <p class="mt-2 text-slate-600"><strong>Goal Statement (SMART):</strong> To increase the conversion rate to 3% and the returning customer rate to 15%, aiming for an overall ROI increase of 50% by the end of the semester.</p>
+            <div class="space-y-8">
+                <div class="info-card">
+                    <h3 class="text-xl font-bold">Project Charter Summary</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                        <div>
+                            <h4 class="font-semibold text-lg">Business Case</h4>
+                            <p class="text-slate-600 mt-1">The business has an inconsistent and difficult-to-measure Return on Investment (ROI) from its digital channels, limiting growth.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg">Problem Statement</h4>
+                            <p class="text-slate-600 mt-1">A low e-commerce conversion rate (**1.66%**) and a low returning customer rate (**6.67%**) result in significant lost revenue and prevent the development of a loyal customer base.</p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="info-card">
+                     <h3 class="text-xl font-bold">Project Goal & Scope</h3>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                         <div>
+                            <h4 class="font-semibold text-lg">Goal Statement (SMART)</h4>
+                            <p class="text-slate-600 mt-1">To increase the conversion rate to 3% and the returning customer rate to 15%, aiming for an overall ROI increase of 50% by the end of the semester.</p>
+                         </div>
+                         <div>
+                            <h4 class="font-semibold text-lg">Project Scope</h4>
+                            <p class="text-slate-600 mt-1"><strong class="text-green-600">In-Scope:</strong> The end-to-end digital customer journey, including website analytics, SEO, and retention strategies.</p>
+                            <p class="text-slate-600 mt-1"><strong class="text-red-600">Out-of-Scope:</strong> All manual fulfillment processes and in-person pop-up events.</p>
+                         </div>
+                     </div>
+                </div>
             </div>
         </section>
 
@@ -111,25 +159,23 @@
                 </div>
             </div>
              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="info-card">
-                    <h3 class="text-xl font-bold">Conversion Funnel Data (90 Days)</h3>
-                    <table class="w-full mt-4 text-sm control-table">
-                        <thead><tr><th>Funnel Stage</th><th>Sessions</th><th>Drop-off</th></tr></thead>
-                        <tbody>
-                            <tr><td>All Sessions</td><td class="font-bold">1,919</td><td>-</td></tr>
-                            <tr><td>Added to Cart</td><td class="font-bold">~107</td><td class="text-red-600 font-semibold">94.4%</td></tr>
-                            <tr><td>Reached Checkout</td><td class="font-bold">~49</td><td class="text-red-600 font-semibold">54.1%</td></tr>
-                            <tr><td>Completed Purchase</td><td class="font-bold">~32</td><td class="text-red-600 font-semibold">35.3%</td></tr>
-                        </tbody>
-                    </table>
+                <div class="info-card md:col-span-2">
+                    <h3 class="text-xl font-bold text-center">Conversion Funnel Breakdown (Last 90 Days)</h3>
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="funnelChart"></canvas>
+                    </div>
                 </div>
                 <div class="info-card">
-                     <h3 class="text-xl font-bold">Customer Retention (90 Days)</h3>
-                     <div class="text-center my-8">
-                        <p class="text-6xl font-extrabold text-amber-600">6.67%</p>
-                        <p class="font-semibold text-slate-700 mt-2">Returning Customer Rate</p>
-                        <p class="text-sm text-slate-500 mt-1">Indicates a significant opportunity to build customer loyalty.</p>
-                     </div>
+                     <h3 class="text-xl font-bold text-center">Customer Retention (90 Days)</h3>
+                     <div class="chart-container" style="height: 250px;">
+                        <canvas id="retentionChart"></canvas>
+                    </div>
+                </div>
+                 <div class="info-card">
+                     <h3 class="text-xl font-bold text-center">Traffic Sources (90 Days)</h3>
+                     <div class="chart-container" style="height: 250px;">
+                        <canvas id="trafficChart"></canvas>
+                    </div>
                 </div>
             </div>
         </section>
@@ -143,19 +189,25 @@
                     <p class="text-slate-500">Using the baseline data to validate potential root causes and pinpoint the most critical areas for improvement.</p>
                 </div>
             </div>
-            <div class="info-card">
-                <h3 class="text-xl font-bold mb-4">Fishbone (Cause & Effect) Diagram Summary</h3>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-                    <div><h4 class="font-semibold">Method</h4><ul class="list-disc list-inside"><li>Complex checkout</li><li>No A/B testing</li><li>**No retention process**</li></ul></div>
-                    <div><h4 class="font-semibold">Materials</h4><ul class="list-disc list-inside"><li>No reviews</li><li>No trust badges</li></ul></div>
-                    <div><h4 class="font-semibold">Machine</h4><ul class="list-disc list-inside"><li>Poor SEO</li><li>Bad UX</li></ul></div>
-                    <div><h4 class="font-semibold">People</h4><ul class="list-disc list-inside"><li>Solo operator</li><li>Divided focus</li></ul></div>
-                    <div><h4 class="font-semibold">Measurement</h4><ul class="list-disc list-inside"><li>Siloed data</li><li>No user tracking</li></ul></div>
-                    <div><h4 class="font-semibold">Environment</h4><ul class="list-disc list-inside"><li>High competition</li><li>Impersonal</li></ul></div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="info-card">
+                    <h3 class="text-xl font-bold mb-4">Fishbone Diagram: Potential Causes</h3>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div><h4 class="font-semibold">Method</h4><ul class="list-disc list-inside"><li>Complex checkout</li><li>No retention process</li></ul></div>
+                        <div><h4 class="font-semibold">Materials</h4><ul class="list-disc list-inside"><li>No reviews</li><li>No trust badges</li></ul></div>
+                        <div><h4 class="font-semibold">Machine</h4><ul class="list-disc list-inside"><li>Poor SEO</li><li>Bad mobile UX</li></ul></div>
+                        <div><h4 class="font-semibold">People</h4><ul class="list-disc list-inside"><li>Solo operator</li><li>Divided focus</li></ul></div>
+                    </div>
                 </div>
-                <hr class="my-6">
-                <h3 class="text-xl font-bold">Validated Root Causes</h3>
-                <p class="mt-2 text-slate-600">The data validates that the most significant problems are a lack of initial trust on product pages (causing high initial drop-off), high friction on the cart/checkout pages, and a lack of a post-purchase process to encourage repeat business.</p>
+                 <div class="info-card">
+                    <h3 class="text-xl font-bold">Validated Root Causes</h3>
+                    <p class="mt-2 text-slate-600">The funnel data validates that the most significant problems are:</p>
+                     <ul class="list-disc list-inside text-slate-600 mt-2 space-y-1">
+                         <li>A lack of initial trust on product pages.</li>
+                         <li>High friction on the cart & checkout pages.</li>
+                         <li>No post-purchase process to encourage repeat business.</li>
+                     </ul>
+                </div>
             </div>
         </section>
 
@@ -171,22 +223,22 @@
             <div class="space-y-6">
                 <div class="info-card border-l-4 border-yellow-500">
                     <h4 class="font-bold text-lg">Strategic Solution: Unify Brand Websites</h4>
-                    <p class="text-sm text-slate-600">Merge the Original Landlords site into RVSO78.com to consolidate SEO authority, improve brand discovery, and simplify operations. This is the foundational improvement.</p>
+                    <p class="text-slate-600 mt-2">Merge the Original Landlords site into RVSO78.com to consolidate SEO authority, improve brand discovery, and simplify operations. This is the foundational improvement that enables all other tactical solutions.</p>
                 </div>
                 <div>
                     <h4 class="text-lg font-semibold text-center my-4">Tactical Solutions (for the unified site)</h4>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="info-card p-4">
-                            <p class="font-bold">Add Trust Signals & Reviews</p>
-                            <p class="text-xs text-slate-500">Build social proof to increase visitor confidence.</p>
+                        <div class="info-card p-4 text-center">
+                            <p class="text-3xl">⭐</p>
+                            <p class="font-bold mt-2">Add Trust Signals & Reviews</p>
                         </div>
-                        <div class="info-card p-4">
-                            <p class="font-bold">Streamline Checkout</p>
-                            <p class="text-xs text-slate-500">Enable guest checkout and simplify forms to reduce friction.</p>
+                        <div class="info-card p-4 text-center">
+                            <p class="text-3xl">🛒</p>
+                            <p class="font-bold mt-2">Streamline Checkout</p>
                         </div>
-                        <div class="info-card p-4">
-                            <p class="font-bold">Implement Email/SMS Capture</p>
-                            <p class="text-xs text-slate-500">Use a pop-up with an incentive to build a marketing list for repeat purchases.</p>
+                        <div class="info-card p-4 text-center">
+                             <p class="text-3xl">✉️</p>
+                            <p class="font-bold mt-2">Implement Email/SMS Capture</p>
                         </div>
                     </div>
                 </div>
@@ -224,7 +276,7 @@
                      </ul>
                 </div>
                 <div class="md:col-span-2 info-card">
-                    <h3 class="text-xl font-bold text-center">Pretend this is an Xbar chart or something</h3>
+                    <h3 class="text-xl font-bold text-center">Pretend this is a Xbar chart</h3>
                     <div class="chart-container" style="height: 250px;">
                         <canvas id="controlChart"></canvas>
                     </div>
@@ -240,28 +292,65 @@
         return Array.isArray(label) ? label.join(' ') : label;
     };
 
+    // Funnel Chart
+    const funnelCtx = document.getElementById('funnelChart').getContext('2d');
+    new Chart(funnelCtx, {
+        type: 'bar',
+        data: {
+            labels: ['All Sessions', ['Added to', 'Cart'], ['Reached', 'Checkout'], ['Completed', 'Purchase']],
+            datasets: [{
+                data: [1919, 107, 49, 32],
+                backgroundColor: ['#93c5fd', '#60a5fa', '#3b82f6', '#2563eb'],
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false }, tooltip: { callbacks: { title: tooltipTitleCallback } } },
+            scales: { y: { beginAtZero: true, title: { display: true, text: 'Number of Sessions' } } }
+        }
+    });
+
+    // Retention Chart
+    const retentionCtx = document.getElementById('retentionChart').getContext('2d');
+    new Chart(retentionCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['New Customers', 'Returning Customers'],
+            datasets: [{
+                data: [93.33, 6.67],
+                backgroundColor: ['#e2e8f0', '#fbbf24'],
+                borderColor: '#fff',
+                borderWidth: 4
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { title: tooltipTitleCallback } } },
+            cutout: '60%'
+        }
+    });
+
+    // Traffic Chart
+    const trafficCtx = document.getElementById('trafficChart').getContext('2d');
+    new Chart(trafficCtx, {
+        type: 'pie',
+        data: {
+            labels: ['Organic Search', 'Direct', 'Social', 'Other'],
+            datasets: [{
+                data: [19.32, 55.0, 20.68, 5.0],
+                backgroundColor: ['#f97316', '#1d4ed8', '#0ea5e9', '#64748b'],
+                borderColor: '#fff',
+                borderWidth: 4
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { title: tooltipTitleCallback } } },
+        }
+    });
+
     // Control Chart
     const controlCtx = document.getElementById('controlChart').getContext('2d');
-    const goalLine = {
-        id: 'goalLine',
-        afterDraw(chart, args, options) {
-            if (!options.goalValue) return;
-            const { ctx, chartArea: { top, right, bottom, left }, scales: { x, y } } = chart;
-            ctx.save();
-            ctx.strokeStyle = options.lineColor;
-            ctx.lineWidth = options.lineWidth;
-            ctx.setLineDash([6, 6]);
-            ctx.beginPath();
-            ctx.moveTo(left, y.getPixelForValue(options.goalValue));
-            ctx.lineTo(right, y.getPixelForValue(options.goalValue));
-            ctx.stroke();
-            ctx.fillStyle = options.lineColor;
-            ctx.font = 'bold 12px Inter';
-            ctx.textAlign = 'right';
-            ctx.fillText(options.label, right, y.getPixelForValue(options.goalValue) - 10);
-            ctx.restore();
-        }
-    };
     new Chart(controlCtx, {
         type: 'line',
         data: {
